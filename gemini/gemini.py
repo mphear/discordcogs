@@ -70,18 +70,22 @@ class GoogleGemini(commands.Cog):
         except Exception as e:
             await ctx.send(f"An error occurred: {str(e)}")
 
-    @commands.command(name="apikey")
+    @commands.command(name="apikey", aliases=['set_api_key'], invoke_without_command=True)
     @has_permissions(administrator=True)  # Only allow users with administrator permissions to set the API key
     async def update_api_key(self, ctx: commands.Context):
         """Start the process to update the Google Gemini API key."""
-        await ctx.send("Please enter your Google Gemini API key:")
+        await ctx.send(f"Please enter your Google Gemini API key. You can also use `{ctx.prefix}apikey <your_key>` directly to set it with any prefix (e.g., `!`, `!!`, `-`).")
 
         def check(message):
             return message.author == ctx.author and message.channel == ctx.channel
 
         # Wait for the user to enter the API key
         try:
-            msg = await self.bot.wait_for("message", check=check, timeout=60)  # Waits for 60 seconds for a reply
+            if len(ctx.message.content.split()) > 1:
+            new_api_key = ctx.message.content.split(' ', 1)[1]
+        else:
+            msg = await self.bot.wait_for("message", check=check, timeout=60)
+            new_api_key = msg.content  # Waits for 60 seconds for a reply
             new_api_key = msg.content
 
             # Store the new API key in the config
