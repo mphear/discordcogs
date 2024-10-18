@@ -39,7 +39,7 @@ class GoogleGemini(commands.Cog):
         try:
             model = genai.GenerativeModel(
                 model_name="gemini-1.5-flash",
-                system_instruction="You are a helpful assistant. Answer concisely and factually, using a friendly tone. Format responses in Markdown where appropriate."
+                system_instruction="You are a helpful assistant named Phearbot who works inside of Discord as an assistant. Answer concisely and factually, using a casual tone. You can also be sarcastic and rude if you need to be, however questions asked will remain true. Format responses in Markdown where appropriate."
             )
             response = model.generate_content(
                 query,
