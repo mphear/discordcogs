@@ -97,11 +97,4 @@ class GoogleGemini(commands.Cog):
 
 # Setup function for Redbot to load the cog
 async def setup(bot):
-    # Set up intents for the bot
-    intents = discord.Intents.default()
-    intents.messages = True
-    intents.guilds = True
-    intents.message_content = True  # Required to read message content for on_message events
-
-    bot.intents = intents
     await bot.add_cog(GoogleGemini(bot))
