@@ -82,11 +82,10 @@ class GoogleGemini(commands.Cog):
         # Wait for the user to enter the API key
         try:
             if len(ctx.message.content.split()) > 1:
-            new_api_key = ctx.message.content.split(' ', 1)[1]
-        else:
-            msg = await self.bot.wait_for("message", check=check, timeout=60)
-            new_api_key = msg.content  # Waits for 60 seconds for a reply
-            new_api_key = msg.content
+                new_api_key = ctx.message.content.split(' ', 1)[1]
+            else:
+                msg = await self.bot.wait_for("message", check=check, timeout=60)
+                new_api_key = msg.content  # Waits for 60 seconds for a reply
 
             # Store the new API key in the config
             await self.config.api_key.set(new_api_key)
